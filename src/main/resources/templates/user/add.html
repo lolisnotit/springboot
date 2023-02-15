@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head
+        th:replace="common/head :: head_fragment(title = 'registery', scripts = ~{::script}, links = ~{::link})"></head>
+<body>
+<div class="container">
+  <div th:if="${validationError}" th:each="error : ${validationError}">
+    <label class="text-danger" th:text="${error}"></label>
+  </div>
+  <h1> Task registery</h1>
+  <form th:action="@{/user/create}" th:object="${taskRequest}" th:method="post">
+
+    <div class="form-group">
+      <label>Task Name：<span class="text-danger">※</span></label>
+      <input type="text" th:field="*{task}" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Task contents</label>
+      <input type="text" th:field="*{contents}" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>task deadline<span class="text-danger">※</span></label>
+      <input type="date" th:field="*{deleteDate}" class="form-control">
+    </div>
+
+
+    <br/>
+
+    <div class="text-center">
+      <a href="/user/list" class="btn btn-secondary">cancel</a>
+      <input type="submit" value="　Submit　" class="btn btn-primary">
+    </div>
+
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head
+        th:replace="common/head :: head_fragment(title = 'EDIT TASK', scripts = ~{::script}, links = ~{::link})"></head>
+<body>
+<div class="container">
+    <div th:if="${validationError}" th:each="error : ${validationError}">
+        <label class="text-danger" th:text="${error}"></label>
+    </div>
+    <h1>Task edit</h1>
+
+    <form th:action="@{/user/update}" th:object="${taskUpdateRequest}" th:method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <div class="row mx-md-n5">
+                <div class="col-2 pt-3 border bg-light">TASK NAME<span class="text-danger">※</span></div>
+                <div class="col py-2 border">
+                    <input type="text" class="form-control" th:field="*{task}">
+                </div>
+            </div>
+            <div class="row mx-md-n5">
+                <div class="col-2 pt-3 border bg-light">Contents</div>
+                <div class="col py-2 border">
+                    <input type="text" class="form-control" th:field="*{contents}">
+                </div>
+            </div>
+            <div class="row mx-md-n5">
+                <div class="col-2 pt-3 border bg-light">Deadline<span class="text-danger">※</span></div>
+                <div class="col py-2 border">
+                    <input type="date" class="form-control" th:field="*{deleteDate}">
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Save　">
+            <a th:href="@{/user/{id}(id=*{id})}" class="btn btn-secondary">cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head_fragment(title = 'Task list', scripts = ~{::script}, links = ~{::link})"></head>
+<body>
+<div class="container">
+  <h1>TASK LIST</h1>
+  <div class="float-end">
+    <a th:href="@{/user/add}" class="btn btn-primary">MAKE NEW TASK</a>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>username</th>
+      <th>Task NAME</th>
+      <th>TASK CONTENTS</th>
+      <th>UPDATE DATE</th>
+      <th>CREATED DATE</th>
+      <th>DEADLINE</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasklist}" th:object="${task}" class="align-middle">
+      <td th:text="*{id}"></td>
+      <td th:text="*{username}"></td>
+      <td th:text="*{task}"></td>
+      <td th:text="*{contents}"></td>
+      <td th:text="${#dates.format(task.updateDate, 'yyyy/MM/dd')}"></td>
+      <td th:text="${#dates.format(task.createDate, 'yyyy/MM/dd')}"></td>
+      <td th:text="${#dates.format(task.deleteDate, 'yyyy/MM/dd')}"></td>
+      <td><a th:href="@{/user/{id}(id=*{id})}" class="btn btn-secondary">More info</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
