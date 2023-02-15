@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.demo.dto.TaskRequest;
 import com.example.demo.dto.TaskUpdateRequest;
+import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +29,8 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
-
-
+    @Autowired
+    private UserService userService ;
     @GetMapping(value = "/user/list")
     public String displayList(Model model) {
         List<Task> tasklist = taskService.searchAll();
