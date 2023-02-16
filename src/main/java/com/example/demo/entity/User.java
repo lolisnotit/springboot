@@ -1,34 +1,39 @@
 package com.example.demo.entity;
-package com.example.demo.entity;
+
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import com.sun.istack.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
-@Entity
 @Data
-@Table(name = "USER")
-public class User implements Serializable {
+@Entity
+@NoArgsConstructor
+public class User {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @NotNull
+    @Size(max=255)
+    private String name;
 
-    @Column(name = "password")
+    @NotNull
+    @Size(max=255)
     private String password;
 
+    @NotNull
+    @Size(max=10)
+    private String role;
 
 }
