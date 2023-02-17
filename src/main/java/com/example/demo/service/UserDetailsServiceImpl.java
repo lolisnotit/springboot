@@ -20,6 +20,7 @@ import java.util.Set;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
+
     /**
      * ユーザ情報を取得する。
      * もし引数のユーザ情報が存在しなかったら、UsernameNotFoundExceptionを投げる。

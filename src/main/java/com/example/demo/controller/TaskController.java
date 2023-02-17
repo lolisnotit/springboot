@@ -9,16 +9,20 @@ import com.example.demo.dto.TaskUpdateRequest;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import com.example.demo.entity.Task;
 import com.example.demo.service.TaskService;
 
+import javax.print.DocFlavor;
 
 
 @Controller
@@ -32,9 +36,33 @@ public class TaskController {
 
     @GetMapping(value = "/user/list")
     public String displayList(Model model) {
-        List<Task> tasklist = taskService.searchAll();
-        model.addAttribute("tasklist", tasklist);
-        return "user/list";
+
+        String RoleCond1 ="[ROLE_USER]";
+        String RoleCond2 ="[ROLE_ADMIN]";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String Role = authentication.getAuthorities().toString();
+        System.out.println("role="+Role);
+        if (Role.equals(RoleCond2)) {
+            System.out.println("ADMIN CHECKED");
+            List<Task> tasklist = taskService.searchAll();
+            System.out.println("LISTING TABLE DATA");
+            model.addAttribute("tasklist", tasklist);
+            System.out.println("MODELLING");
+
+            return "user/list";
+
+        } else if (Role.equals(RoleCond1)) {
+            System.out.println("USER CHECKED");
+            List<Task> tasklist = taskService.findByRole();
+            System.out.println("LISTING TABLE CHECKED");
+            model.addAttribute("tasklist", tasklist);
+            System.out.println("MODEL CHECKED");
+            return "user/list";
+        }else {
+            System.out.println("FAILED");
+            return "user/list";
+        }
+
     }
 
 

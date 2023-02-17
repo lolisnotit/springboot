@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,9 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // /adminはADMINロールを持つユーザだけアクセス可能
                 .antMatchers("/admin").hasRole("ADMIN")
                 // /userはUSERロールを持つユーザだけアクセス可能
-                .antMatchers("/user").hasRole("USER")
+                .antMatchers("/user").hasRole("USER");
+
                 // それ以外のページは認証が必要
-                .anyRequest().authenticated();
+
 
         // ログインに関する設定
         http
@@ -61,6 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // ログアウトした場合の遷移先
                 .logoutSuccessUrl("/");
 
+
+
         // @formatter:on
     }
 
@@ -76,6 +80,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * ログイン処理の設定
      */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/h2-console/**");
+    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // ログイン処理時のユーザー情報をDBから取得する

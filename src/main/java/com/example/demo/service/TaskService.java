@@ -28,13 +28,24 @@ import com.example.demo.entity.User;
 @Transactional(rollbackFor = Exception.class)
 public class TaskService {
 
+
+
     @Autowired
     private TaskRepository taskRepository;
-
 
     public List<Task> searchAll() {
         return taskRepository.findAll();
     }
+    public List<Task> findByRole(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            currentUserName = authentication.getName();
+        }
+        String Current = String.valueOf(currentUserName);
+        return  taskRepository.findByUsername(currentUserName);
+    }
+
 
 
 
@@ -49,14 +60,12 @@ public class TaskService {
 
     public void create(TaskRequest taskRequest) {
         Date now = new Date();
-
-
+        Task task = new Task();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = null;
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             currentUserName = authentication.getName();
         }
-        Task task = new Task();
         String Current = String.valueOf(currentUserName);
         task.setUsername(Current);
         task.setTask(taskRequest.getTask());
