@@ -31,6 +31,10 @@
       <td th:text="${#dates.format(task.deleteDate, 'yyyy/MM/dd')}"></td>
       <td><a th:href="@{/user/{id}(id=*{id})}" class="btn btn-secondary">More info</a></td>
     </tr>
+    <a href="/common" class="btn btn-secondary">GO HOME</a>
+    <form class="d-flex" method="post" th:action="@{/logout}">
+      <button class="btn btn-outline-success" type="submit">Logout</button>
+    </form>
     </tbody>
   </table>
 </div>
