@@ -37,7 +37,7 @@ public class Task implements Serializable {
     @Column(name = "create_date")
     private Date createDate;
 
-    @Column(name = "delete_date")
-    private Date deleteDate;
+    @Column(name = "dead_line")
+    private Date deadline;
 }
 

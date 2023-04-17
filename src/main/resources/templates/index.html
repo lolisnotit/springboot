@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>login</title>
-  <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+<head th:replace="common/head :: head_fragment(title = 'login info')"></head>
 
-</head>
+
 <body>
 <div class="text-center">
   <h1>Login</h1>
   <form method="post" th:action="@{/}">
     <!--/* エラーメッセージ */-->
     <p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
-       th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
-      login error</p>
-    <label>Username</label> <input type="text" name="username" /><br /> <br />
-    <label>Password</label> <input type="password" name="password" /><br />
+       th:text="'LOGIN ERROR DUE TO '+${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+      </p>
+    <label>Username</label> <input type="text" name="name" /><br /> <br />
+    <label>Password</label> <input type="password" name="pass" /><br />
     <br />
     <button class="btn btn-primary" type="submit">Login</button>
   </form>

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head
-        th:replace="common/head :: head_fragment(title = 'registery', scripts = ~{::script}, links = ~{::link})"></head>
+<head th:replace="common/head :: head_fragment(title = 'Add table')"></head>
 <body>
 <div class="container">
   <div th:if="${validationError}" th:each="error : ${validationError}">
@@ -23,7 +22,7 @@
 
     <div class="form-group">
       <label>task deadline<span class="text-danger">※</span></label>
-      <input type="date" th:field="*{deleteDate}" class="form-control">
+      <input type="date" th:field="*{deadline}" class="form-control">
     </div>
 
 

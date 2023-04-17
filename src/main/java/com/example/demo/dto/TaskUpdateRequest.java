@@ -11,6 +11,4 @@ public class TaskUpdateRequest extends TaskRequest implements Serializable {
     @NotNull
     private Long id;
 
-
-
 }

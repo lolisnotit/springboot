@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>管理者</title>
-  <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-
-</head>
+<head th:replace="common/head :: head_fragment(title = 'Admin info')"></head>
 <body>
 <th:block th:replace="common :: header" />
 
 <main>
-  <h1>管理者ページ</h1>
+  <h1>Admin page</h1>
 </main>
 </body>
 </html>

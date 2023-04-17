@@ -18,7 +18,7 @@ public class TaskRequest implements Serializable {
     private String contents;
 
     @Size(min=10, max =10 , message = "ENTER DEADLINE")
-    private String deleteDate;
+    private String deadline;
 
 
 

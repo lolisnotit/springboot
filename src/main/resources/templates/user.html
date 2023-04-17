@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>ユーザ</title>
-  <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-
-</head>
+<head th:replace="common/head :: head_fragment(title = 'User info')"></head>
 <body>
 <th:block th:replace="common :: header" />
 
 <main>
-  <h1>ユーザページ</h1>
+  <h1>User page</h1>
 </main>
 </body>
 </html>

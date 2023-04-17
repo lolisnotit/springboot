@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head
-        th:replace="common/head :: head_fragment(title = 'task info', scripts = ~{::script}, links = ~{::link})"></head>
+<head th:replace="common/head :: head_fragment(title = 'View table')"></head>
 <body>
 <div class="container">
     <h1>TASK INFO</h1>
@@ -22,7 +21,7 @@
         <div class="row mx-md-n5">
             <div class="col-2 pt-3 border bg-light">DEADLINE</div>
             <div class="col pt-3 border">
-                <p th:text="*{deleteDate}"></p>
+                <p th:text="*{deadline}"></p>
             </div>
         </div>
     </div>

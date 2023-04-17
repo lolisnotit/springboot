@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="common/head :: head_fragment(title = 'Task list', scripts = ~{::script}, links = ~{::link})"></head>
+<head th:replace="common/head :: head_fragment(title = 'task list')"></head>
 <body>
 <div class="container">
   <h1>TASK LIST</h1>
@@ -29,7 +29,7 @@
       <td th:text="*{contents}"></td>
       <td th:text="${#dates.format(task.updateDate, 'yyyy/MM/dd')}"></td>
       <td th:text="${#dates.format(task.createDate, 'yyyy/MM/dd')}"></td>
-      <td th:text="${#dates.format(task.deleteDate, 'yyyy/MM/dd')}"></td>
+      <td th:text="${#dates.format(task.deadline, 'yyyy/MM/dd')}"></td>
       <td><a th:href="@{/user/{id}(id=*{id})}" class="btn btn-secondary">More info</a></td>
     </tr>
     <a href="/common" class="btn btn-secondary">GO HOME</a>

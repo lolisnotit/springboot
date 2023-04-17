@@ -30,14 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // アクセス権限の設定
         http
                 // /はアクセス制限をかけない
-                .authorizeRequests().antMatchers("/").permitAll()
+                .authorizeRequests()
+
                 // /adminはADMINロールを持つユーザだけアクセス可能
                 .antMatchers("/admin").hasRole("ADMIN")
                 // /userはUSERロールを持つユーザだけアクセス可能
-                .antMatchers("/user").hasRole("USER");
-
+                .antMatchers("/user").hasRole("USER")
+                .anyRequest().authenticated()
+                ;
                 // それ以外のページは認証が必要
-
 
         // ログインに関する設定
         http
@@ -50,14 +51,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // ログインに失敗した場合の遷移先
                 .failureUrl("/")
                 // ユーザIDとパスワードのname設定
-                .usernameParameter("username")
-                .passwordParameter("password")
+                .usernameParameter("name")
+                .passwordParameter("pass")
                 // ログインに成功した場合の遷移先
                 .defaultSuccessUrl("/common", true);
 
         // ログアウトに関する設定
         http
                 .logout()
+                .permitAll()
                 // ログアウト処理を行うページ指定、ここにPOSTするとログアウトする
                 .logoutUrl("/logout")
                 // ログアウトした場合の遷移先
@@ -81,10 +83,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * ログイン処理の設定
      */
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web
                 .ignoring()
-                .antMatchers("/h2-console/**");
+                .antMatchers("/h2-console/**", "/css/**");
+
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

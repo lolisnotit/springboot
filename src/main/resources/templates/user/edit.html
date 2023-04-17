@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head
-        th:replace="common/head :: head_fragment(title = 'EDIT TASK', scripts = ~{::script}, links = ~{::link})"></head>
+<head th:replace="common/head :: head_fragment(title = 'Edit list')"></head>
 <body>
 <div class="container">
     <div th:if="${validationError}" th:each="error : ${validationError}">
@@ -28,7 +27,7 @@
             <div class="row mx-md-n5">
                 <div class="col-2 pt-3 border bg-light">Deadline<span class="text-danger">※</span></div>
                 <div class="col py-2 border">
-                    <input type="date" class="form-control" th:field="*{deleteDate}">
+                    <input type="date" class="form-control" th:field="*{deadline}">
                 </div>
             </div>
         </div>
